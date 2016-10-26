@@ -16,53 +16,56 @@ public class BaseApplication extends Application {
         initView();
     }
 
-
     private void initView() {
         isRunningForeground3();
     }
 
-
     public void isRunningForeground3() {
         if (Build.VERSION.SDK_INT >= 14) {
+            registerActivityLifecycleCallbacks(
+                    new Application.ActivityLifecycleCallbacks() {
+                        @Override
+                        public void onActivityCreated(
+                                Activity activity, Bundle bundle) {
+                            System.out.println("activity----" + "onActivityCreated");
+                        }
 
-            registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+                        @Override
+                        public void onActivityStarted(Activity activity) {
+                            System.out.println("activity----" + "onActivityStarted");
+                        }
 
-                @Override
-                public void onActivityCreated(Activity activity, Bundle bundle) {
+                        @Override
+                        public void onActivityResumed(Activity activity) {
+                            System.out.println("ActivityLifecycleCallbacks判断app 在前台运行");
+                            System.out.println("activity----" + "onActivityResumed");
+                        }
 
-                }
+                        @Override
+                        public void onActivityPaused(Activity activity) {
+                            System.out.println("activity----" + "onActivityPaused");
+                            System.out.println("ActivityLifecycleCallbacks判断app 不在前台运行");
 
-                @Override
-                public void onActivityStarted(Activity activity) {
+                        }
 
-                }
+                        @Override
+                        public void onActivityStopped(Activity activity) {
+                            System.out.println("activity----" + "onActivityStopped");
 
-                @Override
-                public void onActivityResumed(Activity activity) {
-                    System.out.println("isRunningForeground3判断app 在前台运行");
+                        }
 
-                }
+                        @Override
+                        public void onActivitySaveInstanceState(
+                                Activity activity, Bundle bundle) {
+                            System.out.println("activity----" + "onActivitySaveInstanceState");
 
-                @Override
-                public void onActivityPaused(Activity activity) {
-                    System.out.println("isRunningForeground3判断app 不在前台运行");
-                }
+                        }
 
-                @Override
-                public void onActivityStopped(Activity activity) {
-
-                }
-
-                @Override
-                public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-
-                }
-
-                @Override
-                public void onActivityDestroyed(Activity activity) {
-
-                }
-            });
+                        @Override
+                        public void onActivityDestroyed(Activity activity) {
+                            System.out.println("activity----" + "onActivityDestroyed");
+                        }
+                    });
 
         }
     }
