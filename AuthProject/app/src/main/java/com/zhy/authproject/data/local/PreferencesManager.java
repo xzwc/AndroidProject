@@ -8,12 +8,12 @@ import android.content.SharedPreferences;
  * Created by zhanghaoye on 10/24/16.
  */
 
-public class PreferenceManager {
+public class PreferencesManager {
     public static final String PREFERENCES_NAME = "androidarchitecture";
     private SharedPreferences sharedPreferences;
 
 
-    public PreferenceManager(Application application){
+    public PreferencesManager(Application application){
         sharedPreferences = application.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
