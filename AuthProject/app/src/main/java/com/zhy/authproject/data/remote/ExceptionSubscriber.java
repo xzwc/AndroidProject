@@ -3,6 +3,8 @@ package com.zhy.authproject.data.remote;
 import android.app.Application;
 import android.widget.Toast;
 
+import com.zhy.authproject.dialog.ProgressDialogHandler;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
@@ -16,6 +18,7 @@ public class ExceptionSubscriber<T> extends Subscriber<T> {
 
     private SimpleCallback<T> simpleCallback;
     private Application application;
+    private ProgressDialogHandler progressDialogHandler;
 
     public ExceptionSubscriber(SimpleCallback simpleCallback, Application application){
         this.simpleCallback = simpleCallback;
