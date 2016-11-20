@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.zhy.authproject.di.AppComponent;
 import com.zhy.authproject.di.AppModule;
+import com.zhy.authproject.di.DaggerAppComponent;
 
 /**
  * Created by zhanghaoye on 10/21/16.

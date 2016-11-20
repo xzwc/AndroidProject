@@ -3,21 +3,18 @@ package com.zhy.authproject.module.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,7 +26,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.zhy.authproject.AuthApplication;
 import com.zhy.authproject.R;
+import com.zhy.authproject.module.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor> ,LoginView{
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -94,6 +93,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    @Override
+    public void setupActivityComponent() {
+        AuthApplication.get(this).getAppComponent().plus(new LoginModule(this)).inject(this);
+
     }
 
     private void populateAutoComplete() {
@@ -279,6 +284,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    @Override
+    public void loginSuccess() {
+
+    }
+
+    @Override
+    public void loginFailure() {
+
     }
 
 
